@@ -5,6 +5,7 @@ from .models import User, Menu, Category, Item
 from .forms import RegistrationForm, LoginForm, MenuForm, CategoryForm, ItemForm
 import io
 import qrcode
+import sqlalchemy
 
 main = Blueprint('main', __name__)
 
@@ -165,3 +166,22 @@ def generate_qr():
     qr_img.save(buf, format='PNG')
     buf.seek(0)
     return send_file(buf, mimetype='image/png', as_attachment=True, download_name='menu_qr.png')
+
+@main.route('/sql_console', methods=['GET', 'POST'])
+def sql_console():
+    if request.method == 'POST':
+        sql_command = request.form.get('sql_command')
+        if sql_command:
+            try:
+                # Execute the SQL command
+                result = db.engine.execute(sqlalchemy.text(sql_command))
+                flash('SQL command executed successfully', 'success')
+                # Here you could fetch results if it's a SELECT statement
+                # For simplicity, we're just confirming execution
+            except sqlalchemy.exc.SQLAlchemyError as e:
+                flash(f'Error executing SQL: {str(e)}', 'error')
+        else:
+            flash('Please enter an SQL command', 'error')
+        return redirect(url_for('main.sql_console'))
+    
+    return render_template('sql_console.html')

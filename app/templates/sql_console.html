@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}SQL Console{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="page-title">SQL Console</h2>
+    <div class="card">
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="sql_command" class="form-label">SQL Command</label>
+                <textarea name="sql_command" id="sql_command" class="form-input" rows="5" placeholder="Enter SQL command here..."></textarea>
+            </div>
+            <button type="submit" class="btn primary-btn">Execute SQL</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}

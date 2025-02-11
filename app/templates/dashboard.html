@@ -89,5 +89,20 @@
         </div>
     </div>
     {% endblock %}
+    {% block content %}
+    <div class="container">
+        <h2 class="page-title">Dashboard</h2>
+
+        <!-- Existing content... -->
+
+        <!-- Add SQL Console Button -->
+        <div class="card">
+            <h3>SQL Console</h3>
+            <a href="{{ url_for('main.sql_console') }}" class="btn primary-btn">Open SQL Console</a>
+        </div>
+        
+        <!-- Rest of your dashboard content -->
+    </div>
+    {% endblock %}
 </body>
 </html>
