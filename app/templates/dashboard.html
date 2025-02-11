@@ -8,101 +8,83 @@
 </head>
 <body>
     {% extends "base.html" %}
-    {% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
-    {% block content %}
-    <div class="container">
-        <h2 class="page-title">Dashboard</h2>
+{% block content %}
+<div class="container">
+    <h2 class="page-title">Dashboard</h2>
 
-        <!-- Restaurant Info -->
+    <!-- Restaurant Info -->
+    <div class="card">
+        <h3>Restaurant Info</h3>
+        <form method="POST" action="{{ url_for('main.dashboard') }}">
+            {{ menu_form.hidden_tag() }}
+            <div class="form-group">
+                {{ menu_form.restaurant_name.label(class="form-label") }}
+                {{ menu_form.restaurant_name(class="form-input", placeholder="Enter restaurant name") }}
+            </div>
+            <button type="submit" class="btn primary-btn">Save</button>
+        </form>
+    </div>
+
+    <!-- Categories & Items -->
+    <div class="card">
+        <h3>Categories</h3>
+        <ul class="list-group">
+            {% for category in categories %}
+            <li class="list-item">
+                <strong>{{ category.name }}</strong>
+                <a href="{{ url_for('main.edit_category', category_id=category.id) }}" class="btn secondary-btn smaller-btn">Edit</a>
+                <form method="POST" action="{{ url_for('main.delete_category', category_id=category.id) }}" class="inline-form">
+                    <button type="submit" class="btn danger-btn smaller-btn">Delete</button>
+                </form>
+                <ul class="list-sub">
+                    {% for item in category.items %}
+                    <li>
+                        {{ item.name }} - ${{ '%.2f'|format(item.price) }}
+                        <a href="{{ url_for('main.edit_item', item_id=item.id) }}" class="btn small-btn smaller-btn">Edit</a>
+                        <form method="POST" action="{{ url_for('main.delete_item', item_id=item.id) }}" class="inline-form">
+                            <button type="submit" class="btn small-danger-btn smaller-btn">Delete</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                    <li><a href="{{ url_for('main.add_item', category_id=category.id) }}" class="btn secondary-btn smaller-btn">+ Add Item</a></li>
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('main.add_category') }}" class="btn primary-btn smaller-btn">+ Add Category</a>
+        <!-- Add/Edit Category Form -->
+        {% if category_form is defined %}
         <div class="card">
-            <h3>Restaurant Name</h3>
-            <form method="POST" action="{{ url_for('main.dashboard') }}">
-                {{ menu_form.hidden_tag() }}
+            <h3>{{ 'Edit Category' if category_form.name.data else 'Add Category' }}</h3>
+            <form method="POST">
+                {{ category_form.hidden_tag() }}
                 <div class="form-group">
-                    {{ menu_form.restaurant_name.label(class="form-label") }}
-                    {{ menu_form.restaurant_name(class="form-input", placeholder="Enter restaurant name") }}
+                    {{ category_form.name.label(class="form-label") }}
+                    {{ category_form.name(class="form-input", placeholder="Category name") }}
                 </div>
                 <button type="submit" class="btn primary-btn">Save</button>
             </form>
         </div>
-
-        <!-- Categories & Items -->
-        <div class="card">
-            <h3>Categories</h3>
-            <ul class="list-group">
-                {% for category in categories %}
-                <li class="list-item">
-                    <div class="category-header">
-                        <strong>{{ category.name }}</strong>
-                        <a href="{{ url_for('main.edit_category', category_id=category.id) }}" class="btn secondary-btn smaller-btn">Edit</a>
-                        <form method="POST" action="{{ url_for('main.delete_category', category_id=category.id) }}" class="inline-form">
-                            <button type="submit" class="btn danger-btn smaller-btn">Delete</button>
-                        </form>
-                    </div>
-                    <ul class="list-sub">
-                        {% for item in category.items %}
-                        <li>
-                            <div class="category-header">
-                                {{ item.name }} - ${{ '%.2f'|format(item.price) }}
-                                <a href="{{ url_for('main.edit_item', item_id=item.id) }}" class="btn small-btn smaller-btn">Edit</a>
-                                <form method="POST" action="{{ url_for('main.delete_item', item_id=item.id) }}" class="inline-form">
-                                    <button type="submit" class="btn small-danger-btn smaller-btn">Delete</button>
-                                </form>
-                            </div>
-                        </li>
-                        {% endfor %}
-                        <li><a href="{{ url_for('main.add_item', category_id=category.id) }}" class="btn secondary-btn smaller-btn">+ Add Item</a></li>
-                    </ul>
-                </li>
-                {% endfor %}
-            </ul>
-            <a href="{{ url_for('main.add_category') }}" class="btn primary-btn smaller-btn">+ Add Category</a>
-            <!-- Add/Edit Category Form -->
-            {% if category_form is defined %}
-            <div class="card">
-                <h3>{{ 'Edit Category' if category_form.name.data else 'Add Category' }}</h3>
-                <form method="POST">
-                    {{ category_form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ category_form.name.label(class="form-label") }}
-                        {{ category_form.name(class="form-input", placeholder="Category name") }}
-                    </div>
-                    <button type="submit" class="btn primary-btn">Save</button>
-                </form>
-            </div>
-        </div>
-        
         {% endif %}
-
-        
-        
     </div>
-    <div>
-        <!-- QR Code Section -->
-        <div class="card">
-            <h3>QR Code</h3>
-            <div class="button-container">
-                <a href="{{ url_for('main.generate_qr') }}" class="btn primary-btn smaller-btn">Download QR Code</a>
-                <a href="{{ url_for('main.menu', user_id=current_user.id) }}" class="btn secondary-btn smaller-btn">Review Menu</a>
-            </div>
+
+    <!-- QR Code Section -->
+    <div class="card">
+        <h3>QR Code</h3>
+        <div class="button-container">
+            <a href="{{ url_for('main.generate_qr') }}" class="btn primary-btn smaller-btn">Download QR Code</a>
+            <a href="{{ url_for('main.menu', user_id=current_user.id) }}" class="btn secondary-btn smaller-btn">Review Menu</a>
         </div>
     </div>
-    {% endblock %}
-    {% block content %}
-    <div class="container">
-        <h2 class="page-title">Dashboard</h2>
 
-        <!-- Existing content... -->
-
-        <!-- Add SQL Console Button -->
-        <div class="card">
-            <h3>SQL Console</h3>
-            <a href="{{ url_for('main.sql_console') }}" class="btn primary-btn">Open SQL Console</a>
-        </div>
-        
-        <!-- Rest of your dashboard content -->
+    <!-- Add SQL Console Button -->
+    <div class="card">
+        <h3>SQL Console</h3>
+        <a href="{{ url_for('main.sql_console') }}" class="btn primary-btn">Open SQL Console</a>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
 </body>
 </html>
