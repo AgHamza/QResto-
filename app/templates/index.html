@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Home - Digital Menu SaaS{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Transform Your Restaurant Menu</h1>
+    <p>Create, manage, and share your digital menu effortlessly. Empower your business with a modern SaaS solution designed for restaurant owners.</p>
+    <div class="hero-buttons">
+      <a href="{{ url_for('main.register') }}" class="btn primary-btn">Get Started</a>
+      <a href="{{ url_for('main.login') }}" class="btn secondary-btn">Login</a>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="feature">
+    <h2>Easy Menu Management</h2>
+    <p>Effortlessly create and update categories and items. Enjoy an intuitive interface designed for busy restaurant owners.</p>
+  </div>
+  <div class="feature">
+    <h2>QR Code Integration</h2>
+    <p>Generate QR codes for your digital menu, making it easy for customers to access your menu on their mobile devices.</p>
+  </div>
+  <div class="feature">
+    <h2>Real-time Updates</h2>
+    <p>Instantly update your menu as changes occur, ensuring your customers always see the latest information.</p>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <h2>Ready to Upgrade Your Restaurant?</h2>
+  <p>Join hundreds of restaurant owners who trust Digital Menu SaaS to power their digital presence.</p>
+  <a href="{{ url_for('main.register') }}" class="btn primary-btn">Sign Up Today</a>
+</section>
+{% endblock %}

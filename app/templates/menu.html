@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ menu.restaurant_name }} Menu{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{{ menu.restaurant_name }} Menu</h1>
+  {% for category in categories %}
+    <h2>{{ category.name }}</h2>
+    <ul class="list-group">
+      {% for item in category.items %}
+        <li class="list-item">
+          <strong>{{ item.name }}</strong> - ${{ '%.2f'|format(item.price) }}<br>
+          <span>{{ item.description }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</div>
+{% endblock %}
