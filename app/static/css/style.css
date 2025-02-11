@@ -27,9 +27,9 @@ a {
  Container
 ======================================= */
 .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px 15px; /* Reduced padding for smaller screens */
+  max-width: 1500px;
+  margin: auto;
+  padding: 40px 15px; /* Reduced padding for smaller screens */
 }
 
 /* =======================================
@@ -213,7 +213,7 @@ a {
 .hero {
   background: linear-gradient(rgba(0, 82, 204, 0.7), rgba(0, 82, 204, 0.7)), url("../img/hero-bg.jpg") no-repeat left center/cover;
   color: #fff;
-  padding: 60px 37px; /* Reduced padding */
+  padding: 120px 70px; /* Reduced padding */
   text-align: left;
   position: relative;
 }
@@ -234,7 +234,10 @@ a {
 }
 
 .hero-buttons .btn {
+  
   margin: 10px;
+  margin-top: 40px;
+  margin-bottom: -40px;
 }
 
 /* =======================================
@@ -244,7 +247,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 30px 20px; /* Reduced padding */
+  padding: 70px 20px; /* Reduced padding */
   background-color: #fff;
   text-align: center;
 }
@@ -406,10 +409,10 @@ a {
 /* =======================================
    Large Screens (1920px and above)
 ======================================= */
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1700px) {
   /* Container */
   .container {
-      max-width: 1600px; /* Increased max-width for larger screens */
+      max-width: 1900px; /* Increased max-width for larger screens */
       padding: 30px 20px;
   }
 
@@ -529,5 +532,298 @@ a {
       font-size: 1.1rem;
       max-width: 1200px;
       margin: 0 auto 15px;
+  }
+}
+
+/* =======================================
+   Section Titles
+======================================= */
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #0052cc;
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #666;
+  margin-bottom: 50px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =======================================
+ How It Works Section
+======================================= */
+.how-it-works {
+  background-color: #f2f4f8;
+  padding: 80px 20px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  text-align: center;
+  padding: 20px;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background-color: #0052cc;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 20px;
+}
+
+.step h3 {
+  font-size: 1.5rem;
+  color: #0052cc;
+  margin-bottom: 15px;
+}
+
+.step p {
+  color: #666;
+}
+
+/* =======================================
+ Plans Section
+======================================= */
+.plans {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.pricing-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+}
+
+.pricing-card.featured {
+  border: 2px solid #0052cc;
+  position: relative;
+}
+
+.pricing-card.featured::before {
+  content: "Most Popular";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0052cc;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.pricing-card h3 {
+  font-size: 1.8rem;
+  color: #0052cc;
+  margin-bottom: 20px;
+}
+
+.price {
+  margin: 20px 0;
+}
+
+.price .amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.price .period {
+  font-size: 1rem;
+  color: #666;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 30px;
+}
+
+.features-list li {
+  margin: 10px 0;
+  color: #666;
+}
+
+/* =======================================
+ Reviews Section
+======================================= */
+.reviews {
+  padding: 80px 20px;
+  background-color: #f2f4f8;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.review-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-content {
+  margin-bottom: 20px;
+}
+
+.review-content p {
+  color: #666;
+  font-style: italic;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.author-info h4 {
+  font-size: 1.2rem;
+  color: #0052cc;
+}
+
+.author-info p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* =======================================
+ FAQ Section
+======================================= */
+.faq {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.faq-accordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e6ed;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #0052cc;
+  cursor: pointer;
+  position: relative;
+}
+
+.faq-question::after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  font-size: 1.5rem;
+}
+
+.faq-question.active::after {
+  content: '-';
+}
+
+.faq-answer {
+  display: none;
+  padding: 0 20px 20px;
+  color: #666;
+}
+
+.faq-answer.active {
+  display: block;
+}
+
+/* =======================================
+ Responsive Adjustments
+======================================= */
+@media screen and (max-width: 768px) {
+  .section-title {
+      font-size: 2rem;
+  }
+
+  .section-subtitle {
+      font-size: 1rem;
+  }
+
+  .pricing-card {
+      padding: 20px;
+  }
+
+  .price .amount {
+      font-size: 2rem;
+  }
+
+  .review-card {
+      padding: 20px;
+  }
+
+  .faq-question {
+      font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .section-title {
+      font-size: 3rem;
+  }
+
+  .section-subtitle {
+      font-size: 1.4rem;
+  }
+
+  .steps {
+      grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pricing-tiers {
+      grid-template-columns: repeat(3, 1fr);
+  }
+
+  .review-grid {
+      grid-template-columns: repeat(3, 1fr);
   }
 }

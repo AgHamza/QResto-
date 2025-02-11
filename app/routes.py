@@ -187,3 +187,21 @@ def sql_console():
         return redirect(url_for('main.sql_console'))
     
     return render_template('sql_console.html')
+
+@main.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        # Handle form submission
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        
+        # Here you would typically:
+        # - Save to database
+        # - Send email notification
+        # - etc.
+        
+        flash('Thank you for your message. Our team will contact you soon.', 'success')
+        return redirect(url_for('main.index'))
+    
+    return render_template('contact.html')
