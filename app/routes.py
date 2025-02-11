@@ -5,7 +5,7 @@ from .models import User, Menu, Category, Item
 from .forms import RegistrationForm, LoginForm, MenuForm, CategoryForm, ItemForm
 import io
 import qrcode
-import sqlalchemy
+from sqlalchemy import text
 
 main = Blueprint('main', __name__)
 
@@ -173,12 +173,14 @@ def sql_console():
         sql_command = request.form.get('sql_command')
         if sql_command:
             try:
-                # Execute the SQL command
-                result = db.engine.execute(sqlalchemy.text(sql_command))
+                # Execute the SQL command using connection
+                with db.engine.connect() as connection:
+                    result = connection.execute(text(sql_command))
+                    connection.commit()
                 flash('SQL command executed successfully', 'success')
-                # Here you could fetch results if it's a SELECT statement
-                # For simplicity, we're just confirming execution
-            except sqlalchemy.exc.SQLAlchemyError as e:
+                # For SELECT statements, you might want to fetch results
+                # result.fetchall() if needed
+            except Exception as e:
                 flash(f'Error executing SQL: {str(e)}', 'error')
         else:
             flash('Please enter an SQL command', 'error')
